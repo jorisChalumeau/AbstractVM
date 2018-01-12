@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/cjoris/clion-2017.3.1/bin/cmake/bin/cmake
+CMAKE_COMMAND = /cygdrive/c/Users/apaca/.CLion2017.3/system/cygwin_cmake/bin/cmake.exe
 
 # The command to remove a file.
-RM = /home/cjoris/clion-2017.3.1/bin/cmake/bin/cmake -E remove -f
+RM = /cygdrive/c/Users/apaca/.CLion2017.3/system/cygwin_cmake/bin/cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cjoris/CLionProjects/AbstractVM
+CMAKE_SOURCE_DIR = /cygdrive/c/Users/apaca/CLionProjects/AbstractVM
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cjoris/CLionProjects/AbstractVM
+CMAKE_BINARY_DIR = /cygdrive/c/Users/apaca/CLionProjects/AbstractVM
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/cjoris/CLionProjects/AbstractVM
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/cjoris/clion-2017.3.1/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/cygdrive/c/Users/apaca/.CLion2017.3/system/cygwin_cmake/bin/cmake.exe -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/cjoris/clion-2017.3.1/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/cygdrive/c/Users/apaca/.CLion2017.3/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cjoris/CLionProjects/AbstractVM/CMakeFiles /home/cjoris/CLionProjects/AbstractVM/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/apaca/CLionProjects/AbstractVM/CMakeFiles /cygdrive/c/Users/apaca/CLionProjects/AbstractVM/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cjoris/CLionProjects/AbstractVM/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/apaca/CLionProjects/AbstractVM/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,86 @@ untitled/fast:
 	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/build
 .PHONY : untitled/fast
 
-main.o: main.cpp.o
+source/Factory.o: source/Factory.cpp.o
 
-.PHONY : main.o
+.PHONY : source/Factory.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/main.cpp.o
-.PHONY : main.cpp.o
+source/Factory.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/Factory.cpp.o
+.PHONY : source/Factory.cpp.o
 
-main.i: main.cpp.i
+source/Factory.i: source/Factory.cpp.i
 
-.PHONY : main.i
+.PHONY : source/Factory.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/main.cpp.i
-.PHONY : main.cpp.i
+source/Factory.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/Factory.cpp.i
+.PHONY : source/Factory.cpp.i
 
-main.s: main.cpp.s
+source/Factory.s: source/Factory.cpp.s
 
-.PHONY : main.s
+.PHONY : source/Factory.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/main.cpp.s
-.PHONY : main.cpp.s
+source/Factory.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/Factory.cpp.s
+.PHONY : source/Factory.cpp.s
+
+source/IOperand.o: source/IOperand.cpp.o
+
+.PHONY : source/IOperand.o
+
+# target to build an object file
+source/IOperand.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/IOperand.cpp.o
+.PHONY : source/IOperand.cpp.o
+
+source/IOperand.i: source/IOperand.cpp.i
+
+.PHONY : source/IOperand.i
+
+# target to preprocess a source file
+source/IOperand.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/IOperand.cpp.i
+.PHONY : source/IOperand.cpp.i
+
+source/IOperand.s: source/IOperand.cpp.s
+
+.PHONY : source/IOperand.s
+
+# target to generate assembly for a file
+source/IOperand.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/IOperand.cpp.s
+.PHONY : source/IOperand.cpp.s
+
+source/main.o: source/main.cpp.o
+
+.PHONY : source/main.o
+
+# target to build an object file
+source/main.cpp.o:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/main.cpp.o
+.PHONY : source/main.cpp.o
+
+source/main.i: source/main.cpp.i
+
+.PHONY : source/main.i
+
+# target to preprocess a source file
+source/main.cpp.i:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/main.cpp.i
+.PHONY : source/main.cpp.i
+
+source/main.s: source/main.cpp.s
+
+.PHONY : source/main.s
+
+# target to generate assembly for a file
+source/main.cpp.s:
+	$(MAKE) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/source/main.cpp.s
+.PHONY : source/main.cpp.s
 
 # Help Target
 help:
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... untitled"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... source/Factory.o"
+	@echo "... source/Factory.i"
+	@echo "... source/Factory.s"
+	@echo "... source/IOperand.o"
+	@echo "... source/IOperand.i"
+	@echo "... source/IOperand.s"
+	@echo "... source/main.o"
+	@echo "... source/main.i"
+	@echo "... source/main.s"
 .PHONY : help
 
 
