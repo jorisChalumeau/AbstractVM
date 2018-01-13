@@ -10,6 +10,20 @@
 class Int32 : public IOperand {
 public:
     Int32(const std::string& value);
+
+	std::string toString() const override;
+
+	eOperandType getType() const override;
+
+	IOperand *operator+(const IOperand& rhs) const override;
+
+	IOperand *operator-(const IOperand& rhs) const override;
+
+	IOperand *operator*(const IOperand& rhs) const override;
+
+	IOperand *operator/(const IOperand& rhs) const override;
+
+	IOperand *operator%(const IOperand& rhs) const override;
 };
 
 

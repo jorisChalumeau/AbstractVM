@@ -10,6 +10,20 @@
 class Float : public IOperand {
 public:
     Float(const std::string& value);
+
+	std::string toString() const override;
+
+	eOperandType getType() const override;
+
+	IOperand *operator+(const IOperand& rhs) const override;
+
+	IOperand *operator-(const IOperand& rhs) const override;
+
+	IOperand *operator*(const IOperand& rhs) const override;
+
+	IOperand *operator/(const IOperand& rhs) const override;
+
+	IOperand *operator%(const IOperand& rhs) const override;
 };
 
 
