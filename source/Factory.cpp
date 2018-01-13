@@ -11,7 +11,7 @@
 #include "../header/OpBigDecimal.h"
 
 IOperand *Factory::createOperand(eOperandType type, const std::string& value) {
-	switch (type){
+	switch (type) {
 		case Int8:
 			return Factory::createInt8(value);
 		case Int16:
