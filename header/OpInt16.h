@@ -2,14 +2,14 @@
 // Created by cjoris on 1/13/18.
 //
 
-#ifndef UNTITLED_DOUBLE_H
-#define UNTITLED_DOUBLE_H
+#ifndef UNTITLED_INT16_H
+#define UNTITLED_INT16_H
 
 #include "IOperand.h"
 
-class Double : public IOperand {
+class OpInt16 : public IOperand {
 public:
-    Double(const std::string& value);
+    OpInt16(const std::string& value);
 
 	std::string toString() const override;
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //UNTITLED_DOUBLE_H
+#endif //UNTITLED_INT16_H

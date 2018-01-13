@@ -2,14 +2,14 @@
 // Created by cjoris on 1/13/18.
 //
 
-#ifndef UNTITLED_BIGDECIMAL_H
-#define UNTITLED_BIGDECIMAL_H
+#ifndef UNTITLED_INT8_H
+#define UNTITLED_INT8_H
 
 #include "IOperand.h"
 
-class BigDecimal : public IOperand {
+class OpInt8 : public IOperand {
 public:
-    BigDecimal(const std::string& value);
+    OpInt8(const std::string& value);
 
 	std::string toString() const override;
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //UNTITLED_BIGDECIMAL_H
+#endif //UNTITLED_INT8_H

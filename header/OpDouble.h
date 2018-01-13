@@ -2,14 +2,14 @@
 // Created by cjoris on 1/13/18.
 //
 
-#ifndef UNTITLED_FLOAT_H
-#define UNTITLED_FLOAT_H
+#ifndef UNTITLED_DOUBLE_H
+#define UNTITLED_DOUBLE_H
 
 #include "IOperand.h"
 
-class Float : public IOperand {
+class OpDouble : public IOperand {
 public:
-    Float(const std::string& value);
+    OpDouble(const std::string& value);
 
 	std::string toString() const override;
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //UNTITLED_FLOAT_H
+#endif //UNTITLED_DOUBLE_H

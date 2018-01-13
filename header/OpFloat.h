@@ -2,14 +2,14 @@
 // Created by cjoris on 1/13/18.
 //
 
-#ifndef UNTITLED_INT32_H
-#define UNTITLED_INT32_H
+#ifndef UNTITLED_FLOAT_H
+#define UNTITLED_FLOAT_H
 
 #include "IOperand.h"
 
-class Int32 : public IOperand {
+class OpFloat : public IOperand {
 public:
-    Int32(const std::string& value);
+    OpFloat(const std::string& value);
 
 	std::string toString() const override;
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //UNTITLED_INT32_H
+#endif //UNTITLED_FLOAT_H
