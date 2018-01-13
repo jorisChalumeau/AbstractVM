@@ -3,6 +3,12 @@
 //
 
 #include "../header/Factory.h"
+#include "../header/Int8.h"
+#include "../header/Int16.h"
+#include "../header/Int32.h"
+#include "../header/Float.h"
+#include "../header/Double.h"
+#include "../header/BigDecimal.h"
 
 IOperand *Factory::createOperand(eOperandType type, const std::string& value) {
 	switch (type){
@@ -24,25 +30,25 @@ IOperand *Factory::createOperand(eOperandType type, const std::string& value) {
 }
 
 IOperand *Factory::createInt8(const std::string& value) {
-	return nullptr;
+    return (new Int8(value));
 }
 
 IOperand *Factory::createInt16(const std::string& value) {
-	return nullptr;
+    return (new Int16(value));
 }
 
 IOperand *Factory::createInt32(const std::string& value) {
-	return nullptr;
+    return (new Int32(value));
 }
 
 IOperand *Factory::createFloat(const std::string& value) {
-	return nullptr;
+	return (new Float(value));
 }
 
 IOperand *Factory::createDouble(const std::string& value) {
-	return nullptr;
+	return (new Double(value));
 }
 
 IOperand *Factory::createBigDecimal(const std::string& value) {
-	return nullptr;
+	return (new BigDecimal(value));
 }
