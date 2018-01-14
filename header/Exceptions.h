@@ -11,7 +11,6 @@
 class DefaultException : public std::exception{
 protected:
     std::string _msg;
-    std::string _type;
 
 public:
     DefaultException(std::string const& msg);

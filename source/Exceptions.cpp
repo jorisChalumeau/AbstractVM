@@ -6,47 +6,28 @@
 
 DefaultException::DefaultException(std::string const& msg) : _msg(msg) {
     _msg = msg;
-    _type = "";
 }
 
 DefaultException::~DefaultException() throw() {}
 
 const char	*DefaultException::what() const throw() {
-    return (_type + _msg).data();
+    return _msg.data();
 }
 
-OutOfBound::OutOfBound(std::string const &msg) : DefaultException(msg) {
-    _type = "Index out of bound exception : ";
-}
+OutOfBound::OutOfBound(std::string const &msg) : DefaultException("Index out of bound exception : " + msg) {}
 
-IOError::IOError(std::string const& msg) : DefaultException(msg) {
-    _type = "Input/Output exception : ";
-}
+IOError::IOError(std::string const& msg) : DefaultException("Input/Output exception : " + msg) {}
 
-ParseError::ParseError(std::string const& msg) : DefaultException(msg) {
-    _type = "Parsing exception : ";
-}
+ParseError::ParseError(std::string const& msg) : DefaultException("Parsing exception : " + msg) {}
 
-MathError::MathError(std::string const& msg) : DefaultException(msg) {
-    _type = "Math exception : ";
-}
+MathError::MathError(const std::string &msg) : DefaultException("Math error : " + msg) {}
 
-LogicError::LogicError(std::string const& msg) : DefaultException(msg) {
-    _type = "Logic exception : ";
-}
+LogicError::LogicError(const std::string &msg) : DefaultException("Logic error : " + msg) {}
 
-AssertError::AssertError(std::string const& msg) : DefaultException(msg) {
-    _type = "Assertion exception : ";
-}
+AssertError::AssertError(std::string const& msg) : DefaultException("Assertion exception : " + msg) {}
 
-ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException(msg) {
-    _type = "Modulo on non-integer error : "; // divisions par 0, etc
-}
+ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException("divide/modulor by 0 exception : " + msg) {}
 
-ActionOnEmptyStack::ActionOnEmptyStack(std::string const &msg) : DefaultException(msg) {
-    _type = "Action on empty stack exception : ";
-}
+ActionOnEmptyStack::ActionOnEmptyStack(std::string const &msg) : DefaultException("Action on empty stack exception : " + msg) {}
 
-FileDoesNotExist::FileDoesNotExist(std::string const &msg) : DefaultException(msg) {
-    _type = "File not found exception : ";
-}
+FileDoesNotExist::FileDoesNotExist(std::string const &msg) : DefaultException("File not found exception : " + msg) {}
