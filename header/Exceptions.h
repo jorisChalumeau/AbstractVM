@@ -8,59 +8,60 @@
 #include <exception>
 #include <string>
 
-class DefaultException : public std::exception{
+class DefaultException: public std::exception {
 protected:
-    std::string _msg;
+	std::string _msg;
 
 public:
-    DefaultException(std::string const& msg);
-    ~DefaultException() throw();
+	DefaultException(std::string const& msg);
 
-    const char *what() const throw();
+	~DefaultException() throw();
+
+	const char *what() const throw();
 };
 
-class OutOfBound : public DefaultException {
+class OutOfBound: public DefaultException {
 public:
-    OutOfBound(std::string const& msg);
+	OutOfBound(std::string const& msg);
 };
 
-class IOError : public DefaultException {
+class IOError: public DefaultException {
 public:
-    IOError(std::string const& msg);
+	IOError(std::string const& msg);
 };
 
-class ParseError : public DefaultException {
+class ParseError: public DefaultException {
 public:
-    ParseError(std::string const& msg);
+	ParseError(std::string const& msg);
 };
 
-class MathError : public DefaultException {
+class MathError: public DefaultException {
 public:
-    MathError(std::string const& msg);
+	MathError(std::string const& msg);
 };
 
-class LogicError : public DefaultException {
+class LogicError: public DefaultException {
 public:
-    LogicError(std::string const& msg);
+	LogicError(std::string const& msg);
 };
 
-class AssertError : public DefaultException {
+class AssertError: public DefaultException {
 public:
-    AssertError(std::string const& msg);
+	AssertError(std::string const& msg);
 };
 
 class ModuloOnFloat: public DefaultException {
 public:
-    ModuloOnFloat(std::string const& msg);
+	ModuloOnFloat(std::string const& msg);
 };
 
-class ActionOnEmptyStack : public DefaultException {
-    ActionOnEmptyStack(std::string const& msg);
+class ActionOnEmptyStack: public DefaultException {
+	ActionOnEmptyStack(std::string const& msg);
 };
 
 class FileDoesNotExist: public DefaultException {
 public:
-    FileDoesNotExist(std::string const& msg);
+	FileDoesNotExist(std::string const& msg);
 };
 
 #endif //UNTITLED_EXCEPTION_H

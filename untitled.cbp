@@ -80,16 +80,70 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/Exceptions.h">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/Factory.h">
 			<Option target="untitled"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/IOperand.h">
 			<Option target="untitled"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/Memory.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpBigDecimal.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpDouble.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpFloat.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpInt16.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpInt32.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/header/OpInt8.h">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/Exceptions.cpp">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/Factory.cpp">
 			<Option target="untitled"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/IOInterface.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/IOInterface.h">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/IOperand.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/Memory.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpBigDecimal.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpDouble.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpFloat.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpInt16.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpInt32.cpp">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/OpInt8.cpp">
 			<Option target="untitled"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/apaca/CLionProjects/AbstractVM/source/main.cpp">

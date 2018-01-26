@@ -7,7 +7,7 @@
 
 #include <string>
 
-enum eOperandType {Int8 = 1, Int16 = 2, Int32 = 3, Float = 4, Double = 5, BigDecimal = 6}; // precision order
+enum eOperandType {Int8, Int16, Int32, Float, Double, BigDecimal}; // precision order
 
 class IOperand {
 public :

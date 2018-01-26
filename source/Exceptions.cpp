@@ -8,7 +8,7 @@ DefaultException::DefaultException(std::string const& msg) : _msg(msg) {
     _msg = msg;
 }
 
-DefaultException::~DefaultException() throw() {}
+DefaultException::~DefaultException() throw() = default;
 
 const char	*DefaultException::what() const throw() {
     return _msg.data();
