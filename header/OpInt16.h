@@ -9,7 +9,7 @@
 
 class OpInt16 : public IOperand {
 public:
-    OpInt16(const std::string& value);
+	explicit OpInt16(const std::string& value);
 
 	std::string toString() const override;
 
@@ -24,6 +24,8 @@ public:
 	IOperand *operator/(const IOperand& rhs) const override;
 
 	IOperand *operator%(const IOperand& rhs) const override;
+
+	~OpInt16() = default;
 };
 
 

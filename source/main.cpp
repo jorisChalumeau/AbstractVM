@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <vector>
 #include "../header/Factory.h"
 #include "../header/Memory.h"
 #include "../header/Exceptions.h"
@@ -9,9 +10,12 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	auto *ioInterface = new IOInterface();
-	if (argc == 1) { // fichier en entrée
-		ifstream file;
+    Memory *memory;
+    memory = new Memory();
+	auto *ioInterface = new IOInterface(memory);
+    ifstream file;
+
+	if (argc == 2) { // fichier en entrée
 		file.open(argv[1]);
 		if (file.is_open()) {
 			ioInterface->ProcessFile(file);
@@ -24,11 +28,10 @@ int main(int argc, char **argv) {
 		ofstream myFile;
 		myFile.open("temp.avm");
 		while (line != ";;") {
-			cin >> line;
-			myFile << line; // Peut-être +"\n";
+            getline(cin, line);
+			myFile << line << '\n';
 		}
 		myFile.close();
-		ifstream file;
 		file.open("temp.avm");
 		ioInterface->ProcessFile(file);
 		file.close();
@@ -40,8 +43,6 @@ int main(int argc, char **argv) {
 	IOperand *myVal = Factory::createOperand(eOperandType::Float, "37.32");
 	std::string msg = "type de myVal : ";
 	std::cout << msg.append(myVal->toString()) << std::endl;
-	Memory *memory;
-	memory = new Memory();
 	try {
 		memory->addToRegister(2, *myVal);
 		std::cout << memory->getRegisterValue(2)->getType() << std::endl;

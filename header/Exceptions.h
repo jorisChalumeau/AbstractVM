@@ -40,11 +40,6 @@ public:
 	MathError(std::string const& msg);
 };
 
-class LogicError: public DefaultException {
-public:
-	LogicError(std::string const& msg);
-};
-
 class AssertError: public DefaultException {
 public:
 	AssertError(std::string const& msg);
@@ -56,12 +51,28 @@ public:
 };
 
 class ActionOnEmptyStack: public DefaultException {
+public:
 	ActionOnEmptyStack(std::string const& msg);
+};
+
+class LogicError: public DefaultException {
+public:
+	LogicError(std::string const& msg);
 };
 
 class FileDoesNotExist: public DefaultException {
 public:
 	FileDoesNotExist(std::string const& msg);
+};
+
+class NoExitInstruction: public DefaultException {
+public:
+	NoExitInstruction(std::string const& msg);
+};
+
+class NullValueRegister: public DefaultException {
+public:
+	NullValueRegister(std::string const& msg);
 };
 
 #endif //UNTITLED_EXCEPTION_H

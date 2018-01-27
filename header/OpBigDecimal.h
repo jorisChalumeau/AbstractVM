@@ -9,7 +9,7 @@
 
 class OpBigDecimal : public IOperand {
 public:
-    OpBigDecimal(const std::string& value);
+	explicit OpBigDecimal(const std::string& value);
 
 	std::string toString() const override;
 
@@ -24,6 +24,8 @@ public:
 	IOperand *operator/(const IOperand& rhs) const override;
 
 	IOperand *operator%(const IOperand& rhs) const override;
+
+	~OpBigDecimal() = default;
 };
 
 

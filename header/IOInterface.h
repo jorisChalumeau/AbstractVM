@@ -5,15 +5,20 @@
 #ifndef UNTITLED_IOINTERFACE_H
 #define UNTITLED_IOINTERFACE_H
 
-#import <fstream>
+#include <fstream>
+#include "Memory.h"
 
 using namespace std;
 
 class IOInterface {
 public:
-	IOInterface();
+	explicit IOInterface(Memory *memory);
 
 	void ProcessFile(ifstream& file);
+	~IOInterface() = default;
+
+private:
+	Memory _memory;
 };
 
 #endif //UNTITLED_IOINTERFACE_H

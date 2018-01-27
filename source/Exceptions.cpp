@@ -22,12 +22,16 @@ ParseError::ParseError(std::string const& msg) : DefaultException("Parsing excep
 
 MathError::MathError(const std::string &msg) : DefaultException("Math error : " + msg) {}
 
-LogicError::LogicError(const std::string &msg) : DefaultException("Logic error : " + msg) {}
+AssertError::AssertError(std::string const& msg) : DefaultException("Assert exception : " + msg) {}
 
-AssertError::AssertError(std::string const& msg) : DefaultException("Assertion exception : " + msg) {}
-
-ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException("divide/modulor by 0 exception : " + msg) {}
+ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException("divide/modulo by 0 exception : " + msg) {}
 
 ActionOnEmptyStack::ActionOnEmptyStack(std::string const &msg) : DefaultException("Action on empty stack exception : " + msg) {}
 
+LogicError::LogicError(const std::string &msg) : DefaultException("Less than 2 values exception : " + msg) {}
+
 FileDoesNotExist::FileDoesNotExist(std::string const &msg) : DefaultException("File not found exception : " + msg) {}
+
+NoExitInstruction::NoExitInstruction(std::string const &msg) : DefaultException("Program has no exit instruction exception : " + msg) {}
+
+NullValueRegister::NullValueRegister(std::string const &msg) : DefaultException("No value in register exception : " + msg) {}
