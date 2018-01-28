@@ -9,7 +9,7 @@
 
 class OpInt32 : public IOperand {
 public:
-	explicit OpInt32(const std::string& value);
+	OpInt32(const std::string& value);
 
 	std::string toString() const override;
 

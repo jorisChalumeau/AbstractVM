@@ -4,18 +4,49 @@
 
 #include <regex>
 #include "../header/IOInterface.h"
-#include "../header/Memory.h"
+#include "../header/Exceptions.h"
 
-IOInterface::IOInterface(Memory *memory){
+IOInterface::IOInterface(Memory *memory) {
 	_memory = *memory;
 }
 
 void IOInterface::ProcessFile(ifstream& file) {
+	bool exit = false;
 	string line;
-	regex N("[ -]?[0..9]+");
-	regex Z("[ -]?[0..9]+[.]?[0..9]*");
-	while (getline(file, line)) {
-		
+	regex validLine(
+			R"(^((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *\( *(((int8|int16|int32) *, *" *[-]?[0-9]+)|((float|double|bigdecimal) *, *" *[-]?[0-9]+[.]?[0-9]*))) *" *\) *)$)");
+	while (getline(file, line) && !exit) {
+		if (!regex_match(line, validLine)) {
+			throw IOError("Invalid line");
+		}
+		if (line.substr(0, 3) == "pop") {
+			_memory.pop();
+		} else if (line.substr(0, 4) == "dump") {
+			_memory.dump();
+		} else if (line.substr(0, 5) == "clear") {
+			_memory.clear();
+		} else if (line.substr(0, 3) == "dup") {
+			_memory.dup();
+		} else if (line.substr(0, 4) == "swap") {
+			_memory.swap();
+		} else if (line.substr(0, 3) == "add") {
+			_memory.add();
+		} else if (line.substr(0, 3) == "sub") {
+			_memory.sub();
+		} else if (line.substr(0, 3) == "mul") {
+			_memory.mul();
+		} else if (line.substr(0, 3) == "div") {
+			_memory.div();
+		} else if (line.substr(0, 3) == "mod") {
+			_memory.mod();
+		} else if (line.substr(0, 4) == "print") {
+			_memory.print();
+		} else if (line.substr(0, 5) == "exit") {
+			exit = true;
+		}
+	}
+	if (!exit) {
+		throw NoExitInstruction(""); // TODO Quel message ici ?
 	}
 	// tests commandes memory
 	// ne rien faire si commentaire (commence par ";")

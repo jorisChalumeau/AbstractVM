@@ -17,7 +17,7 @@ class Memory {
 public:
 	Memory();
 
-	int addToRegister(int registerNB, IOperand &value);
+	int addToRegister(const int &registerNB, IOperand &value);
 	IOperand *getRegisterValue(int registerNB);
 	void push(eOperandType type, std::string value);
 	void pop();
@@ -37,7 +37,7 @@ public:
 	~Memory();
 
 private:
-	std::stack<IOperand> stack;
+	std::stack<IOperand*> stack;
 	IOperand *registers[16];
 };
 

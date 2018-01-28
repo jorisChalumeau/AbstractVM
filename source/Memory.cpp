@@ -13,7 +13,7 @@ Memory::~Memory() = default;
 /**
  * add value at index registerNB of the register
  */
-int Memory::addToRegister(const int registerNB, IOperand &value) {
+int Memory::addToRegister(const int& registerNB, IOperand& value) {
 	if (registerNB < REG_MIN || registerNB > REG_MAX) {
 		throw OutOfBound("can't add value in register " + std::to_string(registerNB) + ".");
 	}
@@ -35,9 +35,9 @@ IOperand *Memory::getRegisterValue(const int registerNB) {
  * push an element on top of the stack
  */
 void Memory::push(eOperandType type, std::string value) {
-	std::cout << ""+type << value << std::endl;
-	IOperand *op = Factory::createOperand(type, value);
-	stack.push(*op);
+	std::cout << "" + type << value << std::endl;
+	auto *op = Factory::createOperand(type, value);
+	stack.push(op);
 }
 
 /**
@@ -63,7 +63,7 @@ void Memory::clear() {
 void Memory::dup() {
 	if (stack.empty())
 		throw ActionOnEmptyStack("dup");
-	IOperand *val = &stack.top();
+	IOperand *val = stack.top();
 	push(val->getType(), val->toString());
 }
 
@@ -73,9 +73,9 @@ void Memory::dup() {
 void Memory::swap() {
 	if (stack.empty() || stack.size() < 2)
 		throw LogicError(" swap impossible");
-	IOperand *val1 = &stack.top();
+	IOperand *val1 = stack.top();
 	stack.pop();
-	IOperand *val2 = &stack.top();
+	IOperand *val2 = stack.top();
 	stack.pop();
 	push(val1->getType(), val1->toString());
 	push(val2->getType(), val2->toString());
@@ -85,9 +85,9 @@ void Memory::swap() {
  * displays each value on the stack (from top to bottom)
  */
 void Memory::dump() {
-	std::stack<IOperand> cloneStack(stack);
+	std::stack<IOperand *> cloneStack(stack);
 	while (!cloneStack.empty()) {
-		std::cout << cloneStack.top().toString() << std::endl;
+		std::cout << cloneStack.top()->toString() << std::endl;
 		cloneStack.pop();
 	}
 }
@@ -98,9 +98,9 @@ void Memory::dump() {
 void Memory::assert(const eOperandType type, const std::string value) {
 	if (stack.empty())
 		throw ActionOnEmptyStack("assert");
-	IOperand *op = &stack.top();
+	IOperand *op = stack.top();
 	if (op->getType() != type || op->toString() != value)
-		throw AssertError(value+" is different from "+op->toString()+"(from the stack)");
+		throw AssertError(value + " is different from " + op->toString() + " (from the stack)");
 }
 
 /**
@@ -109,9 +109,9 @@ void Memory::assert(const eOperandType type, const std::string value) {
 void Memory::add() {
 	if (stack.empty() || stack.size() < 2)
 		throw LogicError(" addition impossible");
-	IOperand *op1 = &stack.top();
+	IOperand *op1 = stack.top();
 	stack.pop();
-	IOperand *op2 = &stack.top();
+	IOperand *op2 = stack.top();
 	stack.pop();
 	if (op1->getType() > op2->getType())
 		op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -126,10 +126,10 @@ void Memory::add() {
  */
 void Memory::sub() {
 	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" substraction impossible");
-	IOperand *op1 = &stack.top();
+		throw LogicError(" subtraction impossible");
+	IOperand *op1 = stack.top();
 	stack.pop();
-	IOperand *op2 = &stack.top();
+	IOperand *op2 = stack.top();
 	stack.pop();
 	if (op1->getType() > op2->getType())
 		op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -145,9 +145,9 @@ void Memory::sub() {
 void Memory::mul() {
 	if (stack.empty() || stack.size() < 2)
 		throw LogicError(" multiplication impossible");
-	IOperand *op1 = &stack.top();
+	IOperand *op1 = stack.top();
 	stack.pop();
-	IOperand *op2 = &stack.top();
+	IOperand *op2 = stack.top();
 	stack.pop();
 	if (op1->getType() > op2->getType())
 		op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -163,9 +163,9 @@ void Memory::mul() {
 void Memory::div() {
 	if (stack.empty() || stack.size() < 2)
 		throw LogicError(" division impossible");
-	IOperand *op1 = &stack.top();
+	IOperand *op1 = stack.top();
 	stack.pop();
-	IOperand *op2 = &stack.top();
+	IOperand *op2 = stack.top();
 	stack.pop();
 	if (op1->getType() > op2->getType())
 		op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -181,9 +181,9 @@ void Memory::div() {
 void Memory::mod() {
 	if (stack.empty() || stack.size() < 2)
 		throw LogicError(" modulo impossible");
-	IOperand *op1 = &stack.top();
+	IOperand *op1 = stack.top();
 	stack.pop();
-	IOperand *op2 = &stack.top();
+	IOperand *op2 = stack.top();
 	stack.pop();
 	if (op1->getType() > op2->getType())
 		op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -210,7 +210,7 @@ void Memory::load(eOperandType type, const int registerInd) {
 void Memory::store(eOperandType type, const int registerInd) {
 	if (stack.empty())
 		throw ActionOnEmptyStack("store");
-	addToRegister(registerInd, stack.top());
+	addToRegister(registerInd, *stack.top());
 	stack.pop();
 }
 
@@ -220,7 +220,7 @@ void Memory::store(eOperandType type, const int registerInd) {
 void Memory::print() {
 	if (stack.empty())
 		throw ActionOnEmptyStack("print");
-	IOperand *op = &stack.top();
+	IOperand *op = stack.top();
 	if (op->getType() == Int8 && std::stoi(op->toString()) >= 0)
 		printf("%c", std::stoi(op->toString()));
 }

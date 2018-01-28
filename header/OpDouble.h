@@ -9,7 +9,7 @@
 
 class OpDouble : public IOperand {
 public:
-	explicit OpDouble(const std::string& value);
+	OpDouble(const std::string& value);
 
 	std::string toString() const override;
 

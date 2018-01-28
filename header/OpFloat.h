@@ -9,7 +9,7 @@
 
 class OpFloat : public IOperand {
 public:
-	explicit OpFloat(const std::string& value);
+	OpFloat(const std::string& value);
 
 	std::string toString() const override;
 

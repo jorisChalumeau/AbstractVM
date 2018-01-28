@@ -30,15 +30,15 @@ IOperand *Factory::createOperand(eOperandType type, const std::string& value) {
 }
 
 IOperand *Factory::createInt8(const std::string& value) {
-    return (new OpInt8(value));
+	return (new OpInt8(value));
 }
 
 IOperand *Factory::createInt16(const std::string& value) {
-    return (new OpInt16(value));
+	return (new OpInt16(value));
 }
 
 IOperand *Factory::createInt32(const std::string& value) {
-    return (new OpInt32(value));
+	return (new OpInt32(value));
 }
 
 IOperand *Factory::createFloat(const std::string& value) {

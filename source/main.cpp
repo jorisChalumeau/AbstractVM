@@ -10,10 +10,10 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-    Memory *memory;
-    memory = new Memory();
+	Memory *memory;
+	memory = new Memory();
 	auto *ioInterface = new IOInterface(memory);
-    ifstream file;
+	ifstream file;
 
 	if (argc == 2) { // fichier en entrée
 		file.open(argv[1]);
@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
 		ofstream myFile;
 		myFile.open("temp.avm");
 		while (line != ";;") {
-            getline(cin, line);
-			myFile << line << '\n';
+			getline(cin, line);
+			myFile << line << "\r\n";
 		}
 		myFile.close();
 		file.open("temp.avm");
