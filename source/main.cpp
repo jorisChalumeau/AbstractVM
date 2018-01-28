@@ -1,8 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
-#include <vector>
-#include "../header/Factory.h"
 #include "../header/Memory.h"
 #include "../header/Exceptions.h"
 #include "../header/IOInterface.h"
@@ -19,7 +16,13 @@ int main(int argc, char **argv) {
 	if (argc == 2) { // fichier en entrée
 		file.open(argv[1]);
 		if (file.is_open()) {
-			ioInterface->ProcessFile(file);
+			try {
+				ioInterface->ProcessFile(file);
+			} catch (DefaultException& e) {
+				cerr << e.what() << endl;
+				file.close();
+				return EXIT_FAILURE;
+			}
 			file.close();
 		} else {
 			throw FileDoesNotExist(argv[1]);
@@ -30,11 +33,19 @@ int main(int argc, char **argv) {
 		myFile.open("temp.avm");
 		while (line != ";;") {
 			getline(cin, line);
-			myFile << line << "\r\n";
+			if (line != ";;")
+				myFile << line << endl;
 		}
 		myFile.close();
 		file.open("temp.avm");
-		ioInterface->ProcessFile(file);
+		try {
+			ioInterface->ProcessFile(file);
+		} catch (DefaultException& e) {
+			cerr << e.what() << endl;
+			file.close();
+			remove("temp.avm");
+			return EXIT_FAILURE;
+		}
 		file.close();
 		remove("temp.avm");
 	}

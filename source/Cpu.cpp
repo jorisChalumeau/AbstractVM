@@ -16,6 +16,11 @@ Cpu::~Cpu() = default;
 std::string Cpu::dump() {
     std::string msg;
     std::stack<IOperand *> cloneStack(_memory.getStack());
+	if (!cloneStack.empty()) {
+		std::cout << "test not empty" << std::endl;
+	} else {
+		std::cout << "test empty" << std::endl;
+	}
     while (!cloneStack.empty()) {
         msg.append(cloneStack.top()->withoutTrailingZeros()+"\n");
         cloneStack.pop();
@@ -119,7 +124,7 @@ void Cpu::sub() {
         op2 = Factory::createOperand(op1->getType(), op2->toString());
     if (op1->getType() < op2->getType())
         op1 = Factory::createOperand(op2->getType(), op1->toString());
-    op1 = (*op1 - *op2); // throw underflow / overflow exceptions
+    op1 = (*op2 - *op1); // throw underflow / overflow exceptions
     _memory.push(op1->getType(), op1->toString());
 }
 
@@ -155,7 +160,7 @@ void Cpu::div() {
         op2 = Factory::createOperand(op1->getType(), op2->toString());
     if (op1->getType() < op2->getType())
         op1 = Factory::createOperand(op2->getType(), op1->toString());
-    op1 = (*op1 / *op2); // throw underflow / overflow exceptions
+    op1 = (*op2 / *op1); // throw underflow / overflow exceptions
     _memory.push(op1->getType(), op1->toString());
 }
 
@@ -173,6 +178,6 @@ void Cpu::mod() {
         op2 = Factory::createOperand(op1->getType(), op2->toString());
     if (op1->getType() < op2->getType())
         op1 = Factory::createOperand(op2->getType(), op1->toString());
-    op1 = (*op1 % *op2); // throw underflow / overflow exceptions
+    op1 = (*op2 % *op1); // throw underflow / overflow exceptions
     _memory.push(op1->getType(), op1->toString());
 }
