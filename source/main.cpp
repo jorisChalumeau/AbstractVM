@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 			} catch (DefaultException& e) {
 				cerr << e.what() << endl;
 				file.close();
-				return EXIT_FAILURE;
+				return 84;
 			}
 			file.close();
 		} else {
@@ -44,25 +44,10 @@ int main(int argc, char **argv) {
 			cerr << e.what() << endl;
 			file.close();
 			remove("temp.avm");
-			return EXIT_FAILURE;
+			return 84;
 		}
 		file.close();
 		remove("temp.avm");
 	}
-/*
-	std::cout << "Start the program : " << std::endl;
-	std::cout << "Int8 = " << Int8 << std::endl;
-	IOperand *myVal = Factory::createOperand(eOperandType::Float, "37.32");
-	std::string msg = "type de myVal : ";
-	std::cout << msg.append(myVal->toString()) << std::endl;
-	try {
-		mem->addToRegister(2, *myVal);
-		std::cout << mem->getRegisterValue(2)->getType() << std::endl;
-		mem->addToRegister(-3, *myVal);
-		std::cout << mem->getRegisterValue(-3)->getType() << std::endl;
-	} catch (OutOfBound& e) {
-		std::cerr << e.what() << std::endl;
-		return EXIT_FAILURE;
-	}*/
 	return EXIT_SUCCESS;
 }
