@@ -16,11 +16,6 @@ Cpu::~Cpu() = default;
 std::string Cpu::dump() {
     std::string msg;
     std::stack<IOperand *> cloneStack(_memory.getStack());
-	if (!cloneStack.empty()) {
-		std::cout << "test not empty" << std::endl;
-	} else {
-		std::cout << "test empty" << std::endl;
-	}
     while (!cloneStack.empty()) {
         msg.append(cloneStack.top()->withoutTrailingZeros()+"\n");
         cloneStack.pop();

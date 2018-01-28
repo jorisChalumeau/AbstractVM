@@ -23,7 +23,6 @@ void IOInterface::ProcessFile(ifstream& file) {
 			throw IOError("Invalid line : " + to_string(lineCount));
 		}
 		line = trim(line);
-		cout << line;
 		try {
 			if (line.substr(0, 3) == "pop") {
 				_chipset.executeAction(POP);
@@ -46,7 +45,6 @@ void IOInterface::ProcessFile(ifstream& file) {
 			} else if (line.substr(0, 5) == "print") {
 				printf("%c\n", _chipset.print());
 			} else if (line.substr(0, 4) == "dump") {
-				cout << "test" << endl;
 				cout << _chipset.dump();
 			} else if (line.substr(0, 4) == "exit") {
 				exit = true;
