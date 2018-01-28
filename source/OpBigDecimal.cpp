@@ -3,6 +3,8 @@
 //
 
 #include "../header/OpBigDecimal.h"
+#include "../header/Exceptions.h"
+#include "../header/Factory.h"
 
 OpBigDecimal::OpBigDecimal(const std::string &value) {
 	this->type = eOperandType::BigDecimal;
@@ -18,23 +20,37 @@ eOperandType OpBigDecimal::getType() const {
 }
 
 IOperand *OpBigDecimal::operator+(const IOperand& rhs) const {
-	return nullptr;
+	if (withoutTrailingZeros().length() > 200 || rhs.withoutTrailingZeros().length() > 200)
+		throw MathError("underflow or overflow on addition");
+	return Factory::createOperand(BigDecimal, string);
 }
 
 IOperand *OpBigDecimal::operator-(const IOperand& rhs) const {
-	return nullptr;
+	if (withoutTrailingZeros().length() > 200 || rhs.withoutTrailingZeros().length() > 200)
+		throw MathError("underflow or overflow on addition");
+	return Factory::createOperand(BigDecimal, string);
 }
 
 IOperand *OpBigDecimal::operator*(const IOperand& rhs) const {
-	return nullptr;
+	if (withoutTrailingZeros().length() > 200 || rhs.withoutTrailingZeros().length() > 200)
+		throw MathError("underflow or overflow on addition");
+	return Factory::createOperand(BigDecimal, string);
 }
 
 IOperand *OpBigDecimal::operator/(const IOperand& rhs) const {
-	return nullptr;
+	if (std::stoll(rhs.withoutTrailingZeros()) == 0)
+		throw ModuloOnFloat("division by 0");
+	if (withoutTrailingZeros().length() > 200 || rhs.withoutTrailingZeros().length() > 200)
+		throw MathError("underflow or overflow on addition");
+	return Factory::createOperand(BigDecimal, string);
 }
 
 IOperand *OpBigDecimal::operator%(const IOperand& rhs) const {
-	return nullptr;
+	if (std::stoll(rhs.withoutTrailingZeros()) == 0)
+		throw ModuloOnFloat("modulo by 0");
+	if (withoutTrailingZeros().length() > 200 || rhs.withoutTrailingZeros().length() > 200)
+		throw MathError("underflow or overflow on addition");
+	return Factory::createOperand(BigDecimal, string);
 }
 
 std::string OpBigDecimal::typeToString() const {

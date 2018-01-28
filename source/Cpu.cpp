@@ -17,7 +17,7 @@ std::string Cpu::dump() {
     std::string msg;
     std::stack<IOperand *> cloneStack(_memory.getStack());
     while (!cloneStack.empty()) {
-        msg.append(cloneStack.top()->toString()+"\n");
+        msg.append(cloneStack.top()->withoutTrailingZeros()+"\n");
         cloneStack.pop();
     }
     return msg;
@@ -93,9 +93,9 @@ void Cpu::store(eOperandType type, const std::string index) {
 void Cpu::add() {
     if (_memory.getStack().empty() || _memory.getStack().size() < 2)
         throw LogicError("addition impossible");
-    IOperand *op1 = _memory.getStack().top();
+    IOperand *op1 = _memory.getStack().top(); // elem plus recent
     _memory.pop();
-    IOperand *op2 = _memory.getStack().top();
+    IOperand *op2 = _memory.getStack().top(); // elem plus ancien
     _memory.pop();
     if (op1->getType() > op2->getType())
         op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -111,9 +111,9 @@ void Cpu::add() {
 void Cpu::sub() {
     if (_memory.getStack().empty() || _memory.getStack().size() < 2)
         throw LogicError("substraction impossible");
-    IOperand *op1 = _memory.getStack().top();
+    IOperand *op1 = _memory.getStack().top(); // elem plus recent
     _memory.pop();
-    IOperand *op2 = _memory.getStack().top();
+    IOperand *op2 = _memory.getStack().top(); // elem plus ancien
     _memory.pop();
     if (op1->getType() > op2->getType())
         op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -129,9 +129,9 @@ void Cpu::sub() {
 void Cpu::mul() {
     if (_memory.getStack().empty() || _memory.getStack().size() < 2)
         throw LogicError("multiplication impossible");
-    IOperand *op1 = _memory.getStack().top();
+    IOperand *op1 = _memory.getStack().top(); // elem plus recent
     _memory.pop();
-    IOperand *op2 = _memory.getStack().top();
+    IOperand *op2 = _memory.getStack().top(); // elem plus ancien
     _memory.pop();
     if (op1->getType() > op2->getType())
         op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -147,9 +147,9 @@ void Cpu::mul() {
 void Cpu::div() {
     if (_memory.getStack().empty() || _memory.getStack().size() < 2)
         throw LogicError("division impossible");
-    IOperand *op1 = _memory.getStack().top();
+    IOperand *op1 = _memory.getStack().top(); // elem plus recent
     _memory.pop();
-    IOperand *op2 = _memory.getStack().top();
+    IOperand *op2 = _memory.getStack().top(); // elem plus ancien
     _memory.pop();
     if (op1->getType() > op2->getType())
         op2 = Factory::createOperand(op1->getType(), op2->toString());
@@ -165,9 +165,9 @@ void Cpu::div() {
 void Cpu::mod() {
     if (_memory.getStack().empty() || _memory.getStack().size() < 2)
         throw LogicError("mod impossible");
-    IOperand *op1 = _memory.getStack().top();
+    IOperand *op1 = _memory.getStack().top(); // elem plus recent
     _memory.pop();
-    IOperand *op2 = _memory.getStack().top();
+    IOperand *op2 = _memory.getStack().top(); // elem plus ancien
     _memory.pop();
     if (op1->getType() > op2->getType())
         op2 = Factory::createOperand(op1->getType(), op2->toString());

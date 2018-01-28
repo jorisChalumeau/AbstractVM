@@ -24,7 +24,7 @@ MathError::MathError(const std::string &msg) : DefaultException("Math error : " 
 
 AssertError::AssertError(std::string const& msg) : DefaultException("Assert exception : " + msg) {}
 
-ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException("divide/modulo by 0 exception : " + msg) {}
+ModuloOnFloat::ModuloOnFloat(std::string const &msg) : DefaultException("" + msg) {}
 
 ActionOnEmptyStack::ActionOnEmptyStack(std::string const &msg) : DefaultException("Action on empty stack exception : " + msg) {}
 

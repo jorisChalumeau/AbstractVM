@@ -31,11 +31,11 @@ void IOInterface::ProcessFile(ifstream& file) {
 		} else if (line.substr(0, 4) == "swap") {
 			_chipset.executeAction(SWAP);
 		} else if (line.substr(0, 3) == "add") {
-			//_chipset.executeAction(ADD);
+			_chipset.executeAction(ADD);
 		} else if (line.substr(0, 3) == "sub") {
 			_chipset.executeAction(SUB);
 		} else if (line.substr(0, 3) == "mul") {
-			//_chipset.executeAction(MUL);
+			_chipset.executeAction(MUL);
 		} else if (line.substr(0, 3) == "div") {
 			_chipset.executeAction(DIV);
 		} else if (line.substr(0, 3) == "mod") {

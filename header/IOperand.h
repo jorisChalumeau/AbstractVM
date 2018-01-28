@@ -6,6 +6,8 @@
 #define IOPERAND_H
 
 #include <string>
+#include <climits>
+#include <cfloat>
 
 enum eOperandType {Int8, Int16, Int32, Float, Double, BigDecimal}; // precision order
 
@@ -21,6 +23,20 @@ public :
 	virtual IOperand *operator%(const IOperand& rhs) const = 0; // modulo
 
 	virtual ~IOperand() = default;
+
+    std::string withoutTrailingZeros() const {
+        std::string str(string);
+        auto ind = str.length() - 1;
+        if (str.find('.')) {
+            for (ind; ind >= 0; ind--) {
+                if (str[ind] == '0' || str[ind] == '.')
+                    str.erase(str.end() - 1);
+                else
+                    break;
+            }
+        }
+        return str;
+    }
 
 protected:
 	eOperandType type;
