@@ -6,59 +6,81 @@
 #include "../header/IOInterface.h"
 #include "../header/Exceptions.h"
 
-IOInterface::IOInterface(Memory *memory) {
-	_memory = *memory;
-}
+IOInterface::IOInterface(Chipset *chipset) : _chipset(*chipset) {}
+
+IOInterface::~IOInterface() = default;
 
 void IOInterface::ProcessFile(ifstream& file) {
 	bool exit = false;
 	string line;
-	regex validLine(
-			R"(^((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *\( *(((int8|int16|int32) *, *" *[-]?[0-9]+)|((float|double|bigdecimal) *, *" *[-]?[0-9]+[.]?[0-9]*))) *" *\) *)$)");
+    unsigned long nextSpace;
+    regex validLine(
+            R"(^ *((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *(((int8|int16|int32) *\( *[-]?[0-9]+ *\))|((float|double|bigdecimal) *\( *[-]?[0-9]+[.]?[0-9]* *\))))) *$)");
 	while (getline(file, line) && !exit) {
 		if (!regex_match(line, validLine)) {
-			throw IOError("Invalid line");
+            cout << line+"..." << endl;
+            throw IOError("Invalid line");
 		}
+        line = trim(line);
 		if (line.substr(0, 3) == "pop") {
-			_memory.pop();
-		} else if (line.substr(0, 4) == "dump") {
-			_memory.dump();
+			_chipset.executeAction(POP);
 		} else if (line.substr(0, 5) == "clear") {
-			_memory.clear();
+			_chipset.executeAction(CLEAR);
 		} else if (line.substr(0, 3) == "dup") {
-			_memory.dup();
+			_chipset.executeAction(DUP);
 		} else if (line.substr(0, 4) == "swap") {
-			_memory.swap();
+			_chipset.executeAction(SWAP);
 		} else if (line.substr(0, 3) == "add") {
-			_memory.add();
+			//_chipset.executeAction(ADD);
 		} else if (line.substr(0, 3) == "sub") {
-			_memory.sub();
+			_chipset.executeAction(SUB);
 		} else if (line.substr(0, 3) == "mul") {
-			_memory.mul();
+			//_chipset.executeAction(MUL);
 		} else if (line.substr(0, 3) == "div") {
-			_memory.div();
+			_chipset.executeAction(DIV);
 		} else if (line.substr(0, 3) == "mod") {
-			_memory.mod();
-		} else if (line.substr(0, 4) == "print") {
-			_memory.print();
-		} else if (line.substr(0, 5) == "exit") {
+			_chipset.executeAction(MOD);
+		} else if (line.substr(0, 5) == "print") {
+			printf("%c\n", _chipset.print());
+		} else if (line.substr(0, 4) == "dump") {
+			cout << _chipset.dump();
+		} else if (line.substr(0, 4) == "exit") {
 			exit = true;
-		}
+		} else if (line.substr(0, 1) == ";" && line.substr(1, 2) != ";"){
+            // ligne complete en commentaire, rien a faire
+        } else if (line.substr(0, 4) == "load") {
+            line = trim(line.substr(4, line.length()));
+            nextSpace = line.find_first_of(' ');
+            _chipset.executeAction(LOAD, line.substr(0, nextSpace), rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
+		} else if (line.substr(0, 5) == "store") {
+            line = trim(line.substr(5, line.length()));
+            nextSpace = line.find_first_of(' ');
+            _chipset.executeAction(STORE, line.substr(0, nextSpace), rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
+        } else if (line.substr(0, 4) == "push") {
+            line = trim(line.substr(4, line.length()));
+            nextSpace = line.find_first_of(' ');
+            _chipset.executeAction(PUSH, line.substr(0, nextSpace), rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
+        } else if (line.substr(0, 6) == "assert") {
+            line = trim(line.substr(6, line.length()));
+            nextSpace = line.find_first_of(' ');
+            _chipset.executeAction(ASSERT, line.substr(0, nextSpace), rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
+        }
 	}
 	if (!exit) {
 		throw NoExitInstruction(""); // TODO Quel message ici ?
 	}
-	// tests commandes memory
-	// ne rien faire si commentaire (commence par ";")
-//	_memory.push(Int32, "33");
-//	_memory.push(Int32, "42");
-//	_memory.add();
-//	_memory.push(Float, "44.55");
-//	_memory.mul();
-//	_memory.push(Double, "42.42");
-//	_memory.push(Int32, "42");
-//	_memory.dump();
-//	_memory.pop();
-//	_memory.assert(Double, "42.42");
-	// quitter le programme si "exit"
+}
+
+std::string IOInterface::rmvParenthesis(std::string str) {
+    str = trim(str.substr(1, str.length())); // suppression des ' ' après '('
+    const auto strInd = str.find_first_of(')'|' '); // suppression des ' ' et ')' après la valeur
+    return str.substr(0, strInd);
+}
+
+/**
+ * remove leading spaces
+ */
+std::string IOInterface::trim(const std::string& str) {
+	const auto strBegin = str.find_first_not_of(' ');
+	return str.substr(strBegin, str.length());
 }

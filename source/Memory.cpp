@@ -35,7 +35,6 @@ IOperand *Memory::getRegisterValue(const int registerNB) {
  * push an element on top of the stack
  */
 void Memory::push(eOperandType type, std::string value) {
-	std::cout << "" + type << value << std::endl;
 	auto *op = Factory::createOperand(type, value);
 	stack.push(op);
 }
@@ -72,125 +71,13 @@ void Memory::dup() {
  */
 void Memory::swap() {
 	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" swap impossible");
+		throw LogicError("swap impossible");
 	IOperand *val1 = stack.top();
 	stack.pop();
 	IOperand *val2 = stack.top();
 	stack.pop();
 	push(val1->getType(), val1->toString());
 	push(val2->getType(), val2->toString());
-}
-
-/**
- * displays each value on the stack (from top to bottom)
- */
-void Memory::dump() {
-	std::stack<IOperand *> cloneStack(stack);
-	while (!cloneStack.empty()) {
-		std::cout << cloneStack.top()->toString() << std::endl;
-		cloneStack.pop();
-	}
-}
-
-/**
- * asserts parameter is identical to the value on top of the stack, else throw assert error
- */
-void Memory::assert(const eOperandType type, const std::string value) {
-	if (stack.empty())
-		throw ActionOnEmptyStack("assert");
-	IOperand *op = stack.top();
-	if (op->getType() != type || op->toString() != value)
-		throw AssertError(value + " is different from " + op->toString() + " (from the stack)");
-}
-
-/**
- * pop the 2 values on top of the stack, add them and then stack the result
- */
-void Memory::add() {
-	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" addition impossible");
-	IOperand *op1 = stack.top();
-	stack.pop();
-	IOperand *op2 = stack.top();
-	stack.pop();
-	if (op1->getType() > op2->getType())
-		op2 = Factory::createOperand(op1->getType(), op2->toString());
-	if (op1->getType() < op2->getType())
-		op1 = Factory::createOperand(op2->getType(), op1->toString());
-	op1 = (*op1 + *op2); // throw underflow / overflow exceptions
-	push(op1->getType(), op1->toString());
-}
-
-/**
- * pop the 2 values on top of the stack, sub them and then stack the result
- */
-void Memory::sub() {
-	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" subtraction impossible");
-	IOperand *op1 = stack.top();
-	stack.pop();
-	IOperand *op2 = stack.top();
-	stack.pop();
-	if (op1->getType() > op2->getType())
-		op2 = Factory::createOperand(op1->getType(), op2->toString());
-	if (op1->getType() < op2->getType())
-		op1 = Factory::createOperand(op2->getType(), op1->toString());
-	op1 = (*op1 - *op2); // throw underflow / overflow exceptions
-	push(op1->getType(), op1->toString());
-}
-
-/**
- * pop the 2 values on top of the stack, mul them and then stack the result
- */
-void Memory::mul() {
-	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" multiplication impossible");
-	IOperand *op1 = stack.top();
-	stack.pop();
-	IOperand *op2 = stack.top();
-	stack.pop();
-	if (op1->getType() > op2->getType())
-		op2 = Factory::createOperand(op1->getType(), op2->toString());
-	if (op1->getType() < op2->getType())
-		op1 = Factory::createOperand(op2->getType(), op1->toString());
-	op1 = (*op1 * *op2); // throw underflow / overflow exceptions
-	push(op1->getType(), op1->toString());
-}
-
-/**
- * pop the 2 values on top of the stack, div them and then stack the result
- */
-void Memory::div() {
-	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" division impossible");
-	IOperand *op1 = stack.top();
-	stack.pop();
-	IOperand *op2 = stack.top();
-	stack.pop();
-	if (op1->getType() > op2->getType())
-		op2 = Factory::createOperand(op1->getType(), op2->toString());
-	if (op1->getType() < op2->getType())
-		op1 = Factory::createOperand(op2->getType(), op1->toString());
-	op1 = (*op1 / *op2); // throw underflow / overflow exceptions
-	push(op1->getType(), op1->toString());
-}
-
-/**
- * pop the 2 values on top of the stack, mod them and then stack the result
- */
-void Memory::mod() {
-	if (stack.empty() || stack.size() < 2)
-		throw LogicError(" modulo impossible");
-	IOperand *op1 = stack.top();
-	stack.pop();
-	IOperand *op2 = stack.top();
-	stack.pop();
-	if (op1->getType() > op2->getType())
-		op2 = Factory::createOperand(op1->getType(), op2->toString());
-	if (op1->getType() < op2->getType())
-		op1 = Factory::createOperand(op2->getType(), op1->toString());
-	op1 = (*op1 % *op2); // throw underflow / overflow exceptions
-	push(op1->getType(), op1->toString());
 }
 
 /**
@@ -214,13 +101,6 @@ void Memory::store(eOperandType type, const int registerInd) {
 	stack.pop();
 }
 
-/**
- * prints the value on top of the stack as an ASCII character (only if it's and int8)
- */
-void Memory::print() {
-	if (stack.empty())
-		throw ActionOnEmptyStack("print");
-	IOperand *op = stack.top();
-	if (op->getType() == Int8 && std::stoi(op->toString()) >= 0)
-		printf("%c", std::stoi(op->toString()));
+std::stack<IOperand *> Memory::getStack() {
+	return stack;
 }

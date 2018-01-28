@@ -6,10 +6,11 @@
 
 OpInt16::OpInt16(const std::string &value) {
 	this->type = eOperandType::Int16;
+	this->string = value;
 }
 
 std::string OpInt16::toString() const {
-	return "OpInt16";
+	return this->string;
 }
 
 eOperandType OpInt16::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpInt16::operator/(const IOperand& rhs) const {
 
 IOperand *OpInt16::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpInt16::typeToString() const {
+    return "int16";
 }

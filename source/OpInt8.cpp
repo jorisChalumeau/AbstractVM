@@ -6,10 +6,11 @@
 
 OpInt8::OpInt8(const std::string &value) {
 	this->type = eOperandType::Int8;
+	this->string = value;
 }
 
 std::string OpInt8::toString() const {
-	return "OpInt8";
+	return this->string;
 }
 
 eOperandType OpInt8::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpInt8::operator/(const IOperand& rhs) const {
 
 IOperand *OpInt8::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpInt8::typeToString() const {
+    return "int8";
 }

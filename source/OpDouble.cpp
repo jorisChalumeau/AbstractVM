@@ -6,10 +6,11 @@
 
 OpDouble::OpDouble(const std::string &value) {
 	this->type = eOperandType::Double;
+	this->string = value;
 }
 
 std::string OpDouble::toString() const {
-	return "OpDouble";
+	return this->string;
 }
 
 eOperandType OpDouble::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpDouble::operator/(const IOperand& rhs) const {
 
 IOperand *OpDouble::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpDouble::typeToString() const {
+    return "double";
 }

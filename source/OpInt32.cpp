@@ -6,10 +6,11 @@
 
 OpInt32::OpInt32(const std::string &value) {
 	this->type = eOperandType::Int32;
+	this->string = value;
 }
 
 std::string OpInt32::toString() const {
-	return "OpInt32";
+	return this->string;
 }
 
 eOperandType OpInt32::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpInt32::operator/(const IOperand& rhs) const {
 
 IOperand *OpInt32::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpInt32::typeToString() const {
+    return "int32";
 }

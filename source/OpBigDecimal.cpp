@@ -6,10 +6,11 @@
 
 OpBigDecimal::OpBigDecimal(const std::string &value) {
 	this->type = eOperandType::BigDecimal;
+	this->string = value;
 }
 
 std::string OpBigDecimal::toString() const {
-	return "OpBigDecimal";
+	return this->string;
 }
 
 eOperandType OpBigDecimal::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpBigDecimal::operator/(const IOperand& rhs) const {
 
 IOperand *OpBigDecimal::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpBigDecimal::typeToString() const {
+    return "bigdecimal";
 }

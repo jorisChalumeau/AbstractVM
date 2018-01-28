@@ -6,10 +6,11 @@
 
 OpFloat::OpFloat(const std::string &value) {
 	this->type = eOperandType::Float;
+	this->string = value;
 }
 
 std::string OpFloat::toString() const {
-	return "OpFloat";
+	return this->string;
 }
 
 eOperandType OpFloat::getType() const {
@@ -34,4 +35,8 @@ IOperand *OpFloat::operator/(const IOperand& rhs) const {
 
 IOperand *OpFloat::operator%(const IOperand& rhs) const {
 	return nullptr;
+}
+
+std::string OpFloat::typeToString() const {
+    return "float";
 }

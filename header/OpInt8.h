@@ -13,6 +13,8 @@ public:
 
 	std::string toString() const override;
 
+    std::string typeToString() const override;
+
 	eOperandType getType() const override;
 
 	IOperand *operator+(const IOperand& rhs) const override;
