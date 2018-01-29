@@ -16,7 +16,7 @@ void IOInterface::ProcessFile(ifstream& file) {
 	int lineCount = 0;
 	unsigned long nextSpace;
 	regex validLine(
-			R"(^ *((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *(((int8|int16|int32) +\( *[-]?[0-9]+ *\))|((float|double|bigdecimal) +\( *[-]?[0-9]+[.]?[0-9]* *\))))) *$)");
+			R"(^ *((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *(((int8|int16|int32) +\( *[-]?[0-9]+ *\))|((float|double|bigdecimal) +\( *[-]?[0-9]+[.]?[0-9]* *\))))| *) *$)");
 	while (getline(file, line) && !exit) {
 		++lineCount;
 		if (!regex_match(line, validLine)) {
