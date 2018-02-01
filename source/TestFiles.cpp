@@ -16,7 +16,8 @@ void TestFiles::testAllFiles() {
     IOInterface *ioInterface;
     while ((ent = readdir(dir)) != NULL){
         if(string(ent->d_name).substr(0,1) == "t") {
-            std::cout << string("Press 'go'+[ENTER] to display next file (or 'exit' to leave) : ") + ent->d_name << std::endl;
+            std::cout << std::endl << std::endl << string("file : ")+ent->d_name << std::endl;
+            std::cout << string("Press 'go'+[ENTER] to execute file (or 'exit' to leave) : ") << std::endl;
             string line;
             while (line != "go") {
                 getline(cin, line);
