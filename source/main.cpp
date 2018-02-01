@@ -3,6 +3,7 @@
 #include "../header/Memory.h"
 #include "../header/Exceptions.h"
 #include "../header/IOInterface.h"
+#include "../header/TestFiles.h"
 
 using namespace std;
 
@@ -13,8 +14,11 @@ int main(int argc, char **argv) {
 	auto *ioInterface = new IOInterface(chipset);
 	ifstream file;
 
-	if (argc == 2) { // fichier en entrée
-		file.open(argv[1]);
+    // en mode test
+    if (argc == 2 && string(argv[1]) == "test") {
+        TestFiles::testAllFiles();
+    } else if (argc == 2) { // fichier en entrée
+        file.open(argv[1]);
 		if (file.is_open()) {
 			try {
 				ioInterface->ProcessFile(file);

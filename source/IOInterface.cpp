@@ -16,7 +16,7 @@ void IOInterface::ProcessFile(ifstream& file) {
 	int lineCount = 0;
 	unsigned long nextSpace;
 	regex validLine(
-			R"(^ *((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *(((int8|int16|int32) +\( *[-]?[0-9]+ *\))|((float|double|bigdecimal) +\( *[-]?[0-9]+[.]?[0-9]* *\))))| *) *$)");
+			R"(^ *((pop|dump|clear|dup|swap|add|sub|mul|div|mod|print|exit|;.*)|((load|push|assert|store) *(((int8|int16|int32) *\( *[-]?[0-9]+ *\))|((float|double|bigdecimal) *\( *[-]?[0-9]+[.]?[0-9]* *\))))| *) *$)");
 	while (getline(file, line) && !exit) {
 		++lineCount;
 		if (!regex_match(line, validLine)) {
@@ -52,28 +52,28 @@ void IOInterface::ProcessFile(ifstream& file) {
 				// ligne complete en commentaire, rien a faire
 			} else if (line.substr(0, 4) == "load") {
 				line = trim(line.substr(4, line.length()));
-				nextSpace = line.find_first_of(' ');
+				nextSpace = line.find_first_of(' '|'(');
                 if (nextSpace == std::string::npos)
                     nextSpace = 0;
 				_chipset.executeAction(LOAD, line.substr(0, nextSpace),
 									   rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
 			} else if (line.substr(0, 5) == "store") {
 				line = trim(line.substr(5, line.length()));
-				nextSpace = line.find_first_of(' ');
+				nextSpace = line.find_first_of(' '|'(');
                 if (nextSpace == std::string::npos)
                     nextSpace = 0;
 				_chipset.executeAction(STORE, line.substr(0, nextSpace),
 									   rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
 			} else if (line.substr(0, 4) == "push") {
 				line = trim(line.substr(4, line.length()));
-				nextSpace = line.find_first_of(' ');
+				nextSpace = line.find_first_of(' '|'(');
                 if (nextSpace == std::string::npos)
                     nextSpace = 0;
 				_chipset.executeAction(PUSH, line.substr(0, nextSpace),
 									   rmvParenthesis(trim(line.substr(nextSpace, line.length()))));
 			} else if (line.substr(0, 6) == "assert") {
 				line = trim(line.substr(6, line.length()));
-				nextSpace = line.find_first_of(' ');
+				nextSpace = line.find_first_of(' '|'(');
                 if (nextSpace == std::string::npos)
                     nextSpace = 0;
 				_chipset.executeAction(ASSERT, line.substr(0, nextSpace),
@@ -91,7 +91,7 @@ void IOInterface::ProcessFile(ifstream& file) {
 
 std::string IOInterface::rmvParenthesis(std::string str) {
 	str = trim(str.substr(1, str.length())); // suppression des ' ' après '('
-	const auto strInd = str.find_first_of(')' | ' '); // suppression des ' ' et ')' après la valeur
+	const auto strInd = str.find_first_of(')'|' '); // suppression des ' ' et ')' après la valeur
     if (strInd != std::string::npos)
 	    return str.substr(0, strInd);
     return str;
