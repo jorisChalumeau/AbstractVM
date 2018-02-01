@@ -32,6 +32,6 @@ LogicError::LogicError(const std::string &msg) : DefaultException("Less than 2 v
 
 FileDoesNotExist::FileDoesNotExist(std::string const &msg) : DefaultException("File not found exception : " + msg) {}
 
-NoExitInstruction::NoExitInstruction(std::string const &msg) : DefaultException("Program has no exit instruction exception : " + msg) {}
+NoExitInstruction::NoExitInstruction(std::string const &msg) : DefaultException("Program has no exit instruction exception") {}
 
 NullValueRegister::NullValueRegister(std::string const &msg) : DefaultException("No value in register exception : " + msg) {}
